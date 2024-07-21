@@ -18,13 +18,13 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
-	@Column(name = "By")
+	@Column(name = "By",nullable = false)
 	private String userName;
 	
-	@Column(name = "Text")
+	@Column(name = "Text",nullable = false)
 	private String text;
 	
-	@Column(name = "dateofcomment")
+	@Column(name = "dateofcomment",nullable = false)
 	private LocalDateTime dateofcomment;
 
 	public Long getId() {
