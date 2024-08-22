@@ -44,32 +44,14 @@ public class CommentsController {
 
 		List<Map<String, Object>> comments = null;
 		CommonResponse response =null;
-		
-//		if(username != null && date != null) {
-			comments = commentService.getCommentsByUserNameAndDate(username,date);
-			if (comments.size() == 0) {
-				throw new ResourceNotFoundException("Comments", "username and date", username +"/" + date.toString());
-			}
-			
-			response = new CommonResponse(HttpStatus.OK, comments, "Success", null);
-			
-//		}
-//		else if (username != null) {
-//			comments = commentService.getCommentsByUserName(username);
-//			if (comments.size() == 0) {
-//				throw new ResourceNotFoundException("Comments", "username", username);
-//			}
-//			response = new CommonResponse(HttpStatus.OK, comments, "Success", null);
-//		} else if (date != null) {
-//			comments = commentService.getCommentsByDate(date);
-//			if (comments.size() == 0) {
-//				throw new ResourceNotFoundException("Comments", "date", date.toString());
-//			}
-//			response = new CommonResponse(HttpStatus.OK, comments, "Success", null);
-//			
-//		} else {
-//			throw new IllegalArgumentException("Either username or date must be provided");
-//		}
+
+		comments = commentService.getCommentsByUserNameAndDate(username,date);
+		if (comments.size() == 0) {
+			throw new ResourceNotFoundException("Comments", "username and date", username +"/" + date.toString());
+		}
+
+		response = new CommonResponse(HttpStatus.OK, comments, "Success", null);
+
 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 

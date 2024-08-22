@@ -15,50 +15,43 @@ import com.project.comments.service.CommentService;
 
 @Service
 public class CommentServiceImpl implements CommentService{
-	
+
 	@Autowired
 	CommentRepository commentRepository;
-	
+
 	@Override
 	public List<Comments> getComments() {
-	
+
 		List<Comments> commentsList = commentRepository.findAll();
-		
+
 		return commentsList;
 	}
 
 	@Override
 	public List<Comments> getCommentsByUserName(String username) {
-		
+
 		List<Comments> commentsList= commentRepository.findByUserName(username);
-		
+
 		return commentsList;
 	}
 
 	@Override
 	public List<Comments> getCommentsByDate(LocalDate date) {
-		
+
 		LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
-		
+		LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+
 		List<Comments> commentsList = commentRepository.findByDateofcommentBetween(startOfDay,endOfDay);
-		
+
 		return commentsList;
 	}
 
 	@Override
 	public List<Map<String, Object>> getCommentsByUserNameAndDate(String username, LocalDate DateInput) {
-		
-//		if(date != null) {
-//			
-//		}
-		
-//		LocalDateTime startOfDay = date.atStartOfDay();
-//        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
-		
+
 		String dateInputString = DateInput != null ? DateInput.toString() : null;
 		List<Map<String, Object>> commentsList = commentRepository.findByUserNameAndDateofcommentBetweenNativeQueryDynamic(username,dateInputString);
-		
+
 		return commentsList;
 	}
 
