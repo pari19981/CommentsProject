@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,22 @@ public class CommentServiceImpl implements CommentService{
         LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
 		
 		List<Comments> commentsList = commentRepository.findByDateofcommentBetween(startOfDay,endOfDay);
+		
+		return commentsList;
+	}
+
+	@Override
+	public List<Map<String, Object>> getCommentsByUserNameAndDate(String username, LocalDate DateInput) {
+		
+//		if(date != null) {
+//			
+//		}
+		
+//		LocalDateTime startOfDay = date.atStartOfDay();
+//        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+		
+		String dateInputString = DateInput != null ? DateInput.toString() : null;
+		List<Map<String, Object>> commentsList = commentRepository.findByUserNameAndDateofcommentBetweenNativeQueryDynamic(username,dateInputString);
 		
 		return commentsList;
 	}

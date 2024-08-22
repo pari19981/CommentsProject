@@ -18,7 +18,7 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
-	@Column(name = "By",nullable = false)
+	@Column(name = "userName",nullable = false)
 	private String userName;
 	
 	@Column(name = "Text",nullable = false)

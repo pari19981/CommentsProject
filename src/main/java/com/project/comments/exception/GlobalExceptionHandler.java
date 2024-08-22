@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import com.project.comments.model.CommonResponse;
 import com.project.comments.model.ErrorResponseDto;
 
 @RestControllerAdvice
@@ -35,6 +36,18 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponseDTO);
+
+    }
+    
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<CommonResponse> handleException(Exception exception,
+            WebRequest webRequest) {
+    	CommonResponse Response = new CommonResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                "No Data",
+                "Internal Server Error" ,
+                exception.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Response);
 
     }
 	
